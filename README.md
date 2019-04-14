@@ -1,0 +1,2 @@
+# PyTE
+Python Text Editor
