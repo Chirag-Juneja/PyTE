@@ -74,28 +74,38 @@ class Window:
 			file.close()
 
 	def _save_file(self):
-    		if self._file==None:
-				self._file=asksaveasfile()
-				if 
+		if self._file==None:
+			self._file=asksaveasfilename()
+			if self._file=="":
+				self._file==None
+			else:
+				file=open(self._file,"w")
+				file.write(self._thisText.get(1.0,END))
+				file.close()
+				self._root.title(os.path.basename(self._file)+" -  PyTE")
+		else:
+			file=open(self._file,'w')
+			file.write(self._thisText.get(1.0,END))
+			file.close()
 
 	def _exit(self):
-    		self._root.destroy()
+		self._root.destroy()
 
 	#edit menu commands
 
 	def _copy(self):
-			pass
+		self._thisText.event_generate("<<Copy>>")
 
 	def _cut(self):
-			pass
+		self._thisText.event_generate("<<Cut>>")
 
 	def _paste(self):
-    		pass
+		self._thisText.event_generate("<<Paste>>")
 
 	#about menu commands
     
 	def _about(self):
-    		showinfo(title="About",message="Python Text Editor")
+		showinfo(title="About",message="Python Text Editor")
 
 	def run(self):
 		self._root.mainloop()
