@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter.messagebox import *
+from tkinter.filedialog import *
 import os
 
 class Window:
@@ -12,7 +14,7 @@ class Window:
 	_thisAboutMenu = Menu(_thisMenu,tearoff=0)
 	_thisText = Text(_root)
 	_thisScrollBar = Scrollbar(_thisText)
-
+	_file=None
 
 	def __init__(self):
 		#set window title
@@ -56,13 +58,25 @@ class Window:
 	# file menu commands
 
 	def _new_file(self):
-			pass
+		self._root.title("Untitled - PyTE")
+		self._file=None
+		self._thisText.delete(1.0,END)
 	
 	def _open_file(self):
-       		pass
+		self._file=askopenfilename()
+		if self._file == "":
+			self._file=None
+		else:
+			self._root.title(os.path.basename(self._file)+" - PyTE")
+			self._thisText.delete(1.0,END)
+			file=open(self._file,"r")
+			self._thisText.insert(1.0,file.read())
+			file.close()
 
 	def _save_file(self):
-    		pass
+    		if self._file==None:
+				self._file=asksaveasfile()
+				if 
 
 	def _exit(self):
     		self._root.destroy()
@@ -81,7 +95,7 @@ class Window:
 	#about menu commands
     
 	def _about(self):
-    		pass
+    		showinfo(title="About",message="Python Text Editor")
 
 	def run(self):
 		self._root.mainloop()
