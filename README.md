@@ -2,7 +2,8 @@
 This is a simeple Python Text Editor developed using tkinter.
 
 ### Dependencies
-python3 tkinter
+* python3 
+* tkinter
 
 
 
